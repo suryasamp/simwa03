@@ -12,7 +12,7 @@ Aplikasi ini mendukung integrasi dengan Midtrans Payment Gateway untuk proses pe
 
 🧱 Teknologi yang Digunakan
     
-    ◉ Backend: Java, Spring MVC, Spring Boot (opsional)
+    ◉ Backend: Java, Spring MVC, Spring Boot
     ◉ Frontend: HTML, CSS, Bootstrap, jQuery
     ◉ Database: PostgreSQL
     ◉ Integrasi: Midtrans Payment Gateway
