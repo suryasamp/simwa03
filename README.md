@@ -1,4 +1,4 @@
-SIMWA (Sistem Informasi Manajemen Warga) adalah aplikasi berbasis Spring MVC + jQuery yang dirancang untuk membantu pengelolaan data warga, pembayaran iuran, serta pencatatan transaksi secara terintegrasi.
+SIMWA (Sistem Informasi Manajemen Warga) adalah aplikasi berbasis Spring MVC yang dirancang untuk membantu pengelolaan data warga, pembayaran iuran, serta pencatatan transaksi secara terintegrasi.
 Aplikasi ini mendukung integrasi dengan Midtrans Payment Gateway untuk proses pembayaran online, serta menggunakan PostgreSQL sebagai basis data utama.
 
 🔧 Fitur Utama
