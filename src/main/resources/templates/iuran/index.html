@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+</head>
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary" th:attr="data-success=${successMessage}, data-error=${errorMessage}">
+	<div class="app-wrapper">
+		<!-- ==================== HEADER ==================== -->
+		<div th:replace="fragments/header :: header"></div>
+
+		<!-- ==================== SIDEBAR ==================== -->
+		<div th:replace="fragments/sidebar  :: sidebar"></div>
+
+		<!-- ==================== CONTENT ==================== -->
+		<main class="app-main">
+			<div class="app-content p-3 p-md-5">
+				<div class="container-fluid">
+					<div class="d-flex justify-content-between align-items-center mb-4 pt-2">
+						<div>
+							<h2 class="mb-0 text-success">Halaman Riwayat Iuran</h2>
+							<p class="text-muted mb-0">Riwayat lengkap seluruh iuran.</p>
+						</div>
+						<div>
+							<a class="btn btn-success btn-lg shadow-sm" href="/iuran/create">
+								<i class="bi bi-cash me-2"></i>
+								Bayar Iuran Baru
+							</a>
+						</div>
+					</div>
+					<div class="card card-outline card-success">
+						<div class="card-header bg-white border-bottom">
+							<h4 class="card-title mb-0 text-success fw-bold">
+								<i class="bi bi-list-check me-2"></i>
+								List Iuran
+							</h4>
+							<div class="card-tools">
+								<button type="button" class="btn btn-tool text-muted" data-lte-toggle="card-collapse">
+									<i data-lte-icon="expand" class="bi bi-plus-lg"></i>
+									<i data-lte-icon="collapse" class="bi bi-dash-lg"></i>
+								</button>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive" style="overflow-x: scroll;">
+								<div  class="mb-5">
+									<table id="userTable" class="table table-bordered display table-hover">
+										<thead>
+											<tr>
+												<th>No.</th>
+												<th class="min-width-120">Order Id</th>
+												<th class="min-width-150">Tanggal</th>
+												<th class="min-width-200">Nama Warga</th>
+												<th>Blok</th>
+												<th class="min-width-200">Bulan</th>
+												<th>Tahun</th>
+												<th>Status</th>
+												<th class="min-width-150">Metode</th>
+												<th class="min-width-150">Total</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="iuran, iterStat : ${listIuran}">
+												<td th:text="${iterStat.index + 1}"></td>
+												<td th:text="${iuran.orderId}"></td>
+												<td th:text="${#temporals.format(iuran.updatedAt, 'dd-MM-yyyy HH:mm')}"></td>
+												<td th:text="${iuran.namaWarga}"></td>
+												<td th:text="${iuran.codeWarga}"></td>
+												<td>
+													<span th:each="bulan : ${#strings.arraySplit(iuran.bulan, ',')}" 
+														th:text="${bulan}" 
+														class="badge text-bg-light border me-1 mb-1">
+													</span>
+												</td>
+
+												<td th:text="${iuran.tahun}"></td>
+												<td>
+												  <span th:switch="${iuran.status}" class="badge">
+												    <span th:case="'settlement'" class="badge text-bg-success">SETTLEMENT</span>
+												    <span th:case="'pending'" class="badge text-bg-warning text-dark">PENDING</span>
+												    <span th:case="'expire'" class="badge text-bg-danger">EXPIRE</span>
+												    <span th:case="*" class="badge text-bg-secondary">UNKNOWN</span>
+												  </span>
+												</td>
+												<td th:text="${#strings.capitalize(#strings.replace(iuran.paymentType, '_', ' '))}"></td>
+												<td th:text="${'Rp	' +#numbers.formatDecimal(iuran.total, 0, 'POINT', 0, 'NONE')}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+	<script>
+    $(function() {
+      $(document).ready(function() {
+        var body = document.body;
+        var successMessage = body.getAttribute("data-success");
+        var errorMessage = body.getAttribute("data-error");
+        console.log("success:", successMessage, "error:", errorMessage);
+        if (successMessage && typeof iziToast !== 'undefined') {
+          iziToast.success({
+            title : "OK",
+            message : successMessage,
+            position : "topCenter",
+            transitionIn : "bounceInDown",
+            transitionOut : "fadeOutUp",
+          });
+          body.removeAttribute("data-success");
+        }else if(errorMessage && typeof iziToast !== 'undefined'){
+          iziToast.error({
+            title : "Error",
+            message : errorMessage,
+            position : "topCenter",
+            transitionIn : "bounceInDown",
+            transitionOut : "fadeOutUp",
+          });
+          body.removeAttribute("data-error");
+        }
+      });
+      
+      $("#userTable").DataTable({
+        autoWidth : false,
+        ordering : false,
+      });
+      
+    });
+  </script>
+</body>
+</html>

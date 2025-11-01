@@ -1,0 +1,94 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>SIMWA03 | Login</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style-login.css">
+
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+  }
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: #1c5739; /* hijau tua */
+    letter-spacing: 0.5px;
+  }
+  
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+</style>
+
+</head>
+<body>
+	<section class="d-flex align-items-center justify-content-center" style="min-height: 100vh;background-color: #F2F2F2">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-12 col-lg-10">
+					<div class="wrap d-md-flex">
+						<div class="text-wrap p-0 p-lg-4 text-center d-flex align-items-center order-md-last">
+							<div class="text w-100">
+								<h1 class="text-gold">SIMWA</h1>
+								<img src="/img/logo-1.png" alt="SIMWA03 Logo" class="" width="300" height="300"/>
+							</div>
+						</div>
+						<div class="login-wrap p-4 p-lg-5">
+							<div class="d-flex">
+								<div class="w-100">
+									<h3 class="mb-4">Sign In</h3>
+								</div>
+							</div>
+								<div th:if="${param.error}" class="alert alert-danger">Blok Rumah atau Password anda salah!</div>
+								<div th:if="${param.logout}" class="alert alert-success">Anda telah logout.</div>
+							<form th:action="@{/process-login}" class="signin-form" method="post">
+								<div class="form-group mb-3">
+									<label class="label" for="name">Blok Rumah</label>
+									<input type="text" name="username" class="form-control border border-5 border-success" placeholder="Username" required>
+								</div>
+								<div class="form-group mb-3">
+									<label class="label" for="password">Password</label>
+									<input type="password" name="password" class="form-control border border-5 border-success" placeholder="Password" required>
+								</div>
+								<div class="form-group">
+									<button type="submit" class="form-control btn bg-primary-green submit px-3 text-gold">Sign In</button>
+									<a href="/" class="form-control btn bg-gold submit px-3 text-primary-green mt-2">Back to Website</a>
+								</div>
+								<!-- 								<div class="form-group d-md-flex"> -->
+								<!-- 									<div class="w-50 text-left"> -->
+								<!-- 										<label class="checkbox-wrap checkbox-primary mb-0"> -->
+								<!-- 											Remember Me <input type="checkbox" checked> -->
+								<!-- 											<span class="checkmark"></span> -->
+								<!-- 										</label> -->
+								<!-- 									</div> -->
+								<!-- 									<div class="w-50 text-md-right"> -->
+								<!-- 										<a href="#">Forgot Password</a> -->
+								<!-- 									</div> -->
+								<!-- 								</div> -->
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+<!-- 	<script src="js/jquery.min.js"></script> -->
+<!-- 	<script src="js/popper.js"></script> -->
+<!-- 	<script src="js/bootstrap.min.js"></script> -->
+<!-- 	<script src="js/main.js"></script> -->
+
+</body>
+</html>
+

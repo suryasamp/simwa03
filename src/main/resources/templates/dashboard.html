@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+</head>
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary" th:attr="data-success=${message}">
+	<div class="app-wrapper">
+		<!-- ==================== HEADER ==================== -->
+		<div th:replace="fragments/header :: header"></div>
+
+		<!-- ==================== SIDEBAR ==================== -->
+		<div th:replace="fragments/sidebar  :: sidebar"></div>
+
+		<!-- ==================== CONTENT ==================== -->
+		<main class="app-main">
+			<div class="app-content">
+				<div class="container-fluid">
+					<div class="row mt-4 mb-4 g-3">
+						<div class="col-sm-6">
+							<h3 class="mb-0">Dashboard</h3>
+						</div>
+					</div>
+					<div class="card card-outline card-success">
+						<div class="card-body"><!-- /.card-header -->
+						</div><!-- /.card-body -->
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+</body>
+</html>

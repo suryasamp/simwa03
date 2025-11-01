@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+	<aside class="app-sidebar shadow bg-emerald "  th:fragment="sidebar">
+		 <div class=" m-1">
+			<a href="#" class="brand-link">
+				<img src="/img/logo.png" alt="AdminLTE Logo" class="mx-auto d-block" style="background-color: transparent;" width="150" height="150"/>
+			</a>
+		 </div>
+		<div class="sidebar-wrapper ">
+			<nav class="mt-2">
+				<ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="navigation" aria-label="Main navigation" data-accordion="false" id="navigation">
+					<li class="nav-item fs-5">
+						<a href="/dashboard" class="nav-link text-gold">
+							<i class="nav-icon bi bi-speedometer"></i>
+							<p class="">Dashboard</p>
+						</a>
+					</li>
+					<li class="nav-item fs-5">
+						<a href="/warga" class="nav-link text-gold">
+							<i class="nav-icon bi bi-people"></i>
+							<p class="">Warga</p>
+						</a>
+					</li>
+					<li class="nav-item fs-5">
+						<a href="/iuran" class="nav-link text-gold">
+							<i class="nav-icon bi bi-coin"></i>
+							<p class="">Iuran</p>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+</body>
+</html>

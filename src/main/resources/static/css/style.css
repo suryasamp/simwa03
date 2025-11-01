@@ -1,0 +1,143 @@
+.bg-emerald{
+/* 	background: linear-gradient(180deg, #0a0f0b, #102a1c, #1b4332); */
+	background-color: #003b21;
+}
+
+.bg-dark-green{
+	background-color: #0b6a49;
+}
+
+.border-gold{
+	border-color: #ebc476 !important;
+}
+
+.bg-gold{
+	background-color: #ebc476 !important;
+}
+
+.bg-primary-green{
+	background-color: #0F5132 !important;
+}
+
+.text-gold{
+	color:#ebc476 !important;
+}
+.text-primary-green{
+	color: #0F5132 !important;
+}
+
+.bg-light-grey{
+	background-color: #eee !important;
+}
+
+
+.info-box {
+  display: flex;
+  align-items: center;
+}
+
+.info-box-icon {
+  flex-shrink: 0; /* ikon tidak mengecil */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-box-content {
+  flex: 1; /* isi menyesuaikan ruang tersisa */
+  min-width: 0; /* penting agar text-overflow bisa bekerja */
+}
+
+.info-box-content .info-box-text {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+ label.error {
+   color: red;
+   font-size: 0.9rem;
+   margin-top: 4px;
+   display: block;
+ }
+ 
+ label.required::after {
+  content: " *";
+  color: red;
+  font-weight: bold;
+}
+
+.tooltip-btn {
+	position: relative;
+	display: inline-block;
+}
+
+.tooltip-btn .tooltip-text {
+	visibility: hidden;
+	width: max-content;
+	background-color: #fff;
+	color: #333;
+	text-align: center;
+	padding: 5px 8px;
+	border-radius: 6px;
+	font-size: 12px;
+	position: absolute;
+	z-index: 1;
+	bottom: 125%; /* posisikan di atas tombol */
+	left: 50%;
+	transform: translateX(-50%);
+	opacity: 0;
+	transition: opacity 0.3s;
+	white-space: nowrap;
+}
+
+.tooltip-btn .tooltip-text::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #fff transparent transparent transparent;
+}
+
+.tooltip-btn:hover .tooltip-text {
+	visibility: visible;
+	opacity: 1;
+}
+
+
+.datepicker .datepicker-switch {
+  pointer-events: none;   /* biar tidak bisa diklik */
+}
+
+.datepicker .datepicker-months select {
+  display: none;          /* sembunyikan dropdown tahun */
+}
+
+.hidden{
+	display: none !important;
+}
+
+table.table {
+  min-width: 800px; /* atau 1000px jika banyak kolom */
+}
+
+.min-width-200 {
+  min-width: 200px;
+}
+
+.min-width-150 {
+  min-width: 150px;
+}
+
+.min-width-100 {
+  min-width: 100px;
+}
+
+.min-width-120 {
+  min-width: 120px;
+}
+
