@@ -6,8 +6,7 @@
 [![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-336791.svg)](https://www.postgresql.org/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**SIMWA** adalah aplikasi berbasis **Spring MVC + jQuery** yang dirancang untuk membantu pengelolaan data warga dan pembayaran iuran secara **efisien, transparan, dan mudah digunakan**.  
-Aplikasi ini terintegrasi dengan **Midtrans Payment Gateway** untuk mendukung pembayaran online yang aman dan praktis.
+**SIMWA** adalah aplikasi berbasis **Spring MVC + jQuery** yang dirancang untuk membantu pengelolaan data warga dan pembayaran iuran secara **efisien, transparan, dan mudah digunakan**. Aplikasi ini terintegrasi dengan **Midtrans Payment Gateway** untuk mendukung pembayaran online yang aman dan praktis.
 
 ---
 
