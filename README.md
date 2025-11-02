@@ -76,8 +76,8 @@ Aplikasi ini terintegrasi dengan **Midtrans Payment Gateway** untuk mendukung pe
 
 ## 📸 Tampilan
 
-| Login Page | Dashboard |
-|-------------|------------|
+| Login Page |
+|-------------|
 | ![Login](docs/img/login.png) |
 
 
