@@ -24,6 +24,12 @@
 <!-- Custom CSS -->
 <link rel="stylesheet" th:href="@{/css/style.css}" />
 
+<<<<<<< HEAD
+=======
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+
+>>>>>>> master
 <!-- ==================== JS ==================== -->
 <!-- JQUERY -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -39,10 +45,15 @@
 <!-- DataTables -->
 <script src="https://cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/2.3.4/js/dataTables.bootstrap5.min.js"></script>
+<<<<<<< HEAD
+=======
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+>>>>>>> master
 
 
 
 <script>
+<<<<<<< HEAD
 	document.addEventListener("DOMContentLoaded", function() {
 		const currentPath = window.location.pathname;
 		document.querySelectorAll(".nav-link").forEach(link => {
@@ -55,6 +66,45 @@
 		});
 	});
 </script>
+=======
+
+<!-- =========================== ACTIVE SIDEBAR ============================ -->
+document.addEventListener("DOMContentLoaded", function() {
+  const currentPath = window.location.pathname.replace(/\/$/, ""); 
+  
+  document.querySelectorAll(".nav-link").forEach(link => {
+      const href = link.getAttribute("href");
+      if (href) {
+          const normalizedHref = href.replace(/\/$/, "");
+          if (currentPath.startsWith(normalizedHref) && normalizedHref !== "") {
+              
+              link.classList.add("active");
+              
+              const parentTreeview = link.closest(".nav-treeview");
+              
+              if (parentTreeview) {
+                  const grandParentNavItem = parentTreeview.closest(".nav-item");
+                  if (grandParentNavItem) {
+                      grandParentNavItem.classList.add("menu-open");
+
+                      const parentLink = grandParentNavItem.querySelector(':scope > .nav-link');
+                      if(parentLink) {
+                          parentLink.classList.add("active");
+                      }
+                  }
+              } else if (currentPath === normalizedHref) {
+                  const parent = link.closest(".nav-item");
+                  if (parent) {
+                      parent.classList.add("menu-open"); // Opsional, tergantung style Anda
+                  }
+              }
+          }
+      }
+  });
+});
+</script>
+
+>>>>>>> master
 </head>
 <body>
 </body>

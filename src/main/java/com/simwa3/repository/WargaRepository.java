@@ -7,5 +7,12 @@ import com.simwa3.model.WargaModel;
 
 @Repository
 public interface WargaRepository extends JpaRepository<WargaModel, Integer> {
+<<<<<<< HEAD
 	WargaModel findByCodeWarga(String code_warga);
+=======
+	
+	WargaModel findByCodeWarga(String code_warga);
+	
+	WargaModel findByJabatan(String jabatan);
+>>>>>>> master
 }

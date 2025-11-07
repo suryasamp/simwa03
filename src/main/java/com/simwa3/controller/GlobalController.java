@@ -1,5 +1,10 @@
 package com.simwa3.controller;
 
+<<<<<<< HEAD
+=======
+import java.util.List;
+
+>>>>>>> master
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,7 +16,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+<<<<<<< HEAD
 import com.simwa3.model.WargaModel;
+=======
+import com.simwa3.model.NotifikasiModel;
+import com.simwa3.model.WargaModel;
+import com.simwa3.repository.NotifikasiRepository;
+>>>>>>> master
 import com.simwa3.repository.WargaRepository;
 
 
@@ -20,6 +31,12 @@ public class GlobalController {
 
     @Autowired
     private WargaRepository wargaRepository;
+<<<<<<< HEAD
+=======
+    
+    @Autowired
+    private NotifikasiRepository notifikasiRepo;
+>>>>>>> master
 
     @ModelAttribute("avatarPath")
     public void getAvatarPath(Model model, WargaModel wargaModel) {
@@ -39,4 +56,23 @@ public class GlobalController {
         model.addAttribute("avatarPath");
         return;
     }
+<<<<<<< HEAD
+=======
+    
+    @ModelAttribute
+    public void globalAttributes(Model model) {
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    	if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+    		
+    		WargaModel wargaLogin = wargaRepository.findByCodeWarga(authentication.getName());
+    		String jabatan = wargaLogin.getJabatan();
+    		String penerima = jabatan;
+    		Long jumlahNotifBaru = notifikasiRepo.countByPenerimaAndDibacaFalse(penerima);
+    		List<NotifikasiModel> listNotifBaru = notifikasiRepo.findByPenerimaOrderByCreatedAtDesc(penerima).stream().limit(5).toList();
+    		model.addAttribute("jumlahNotifBaru", jumlahNotifBaru);
+    		model.addAttribute("listNotifBaru", listNotifBaru);
+    	}
+
+    }
+>>>>>>> master
 }

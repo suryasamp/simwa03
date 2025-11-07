@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+</head>
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary" th:attr="data-success=${message}">
+	<div class="app-wrapper">
+		<!-- ==================== HEADER ==================== -->
+		<div th:replace="fragments/header :: header"></div>
+
+		<!-- ==================== SIDEBAR ==================== -->
+		<div th:replace="fragments/sidebar  :: sidebar"></div>
+
+		<!-- ==================== CONTENT ==================== -->
+		<main class="app-main">
+			<div class="app-content">
+				<div class="container-fluid">
+					<div class="row mt-4 mb-4 g-3">
+						<div class="col-sm-6">
+							<h3 class="mb-0">Dashboard</h3>
+						</div>
+					</div>
+					<div class="card card-outline card-success">
+						<div class="card-body">
+							<!-- /.card-header -->
+							<h2>Transfer ke Bank</h2>
+							<form th:action="@{/pengeluaran/submit}" method="post" th:object="${pengeluaran}">
+								<label>Deskripsi:</label>
+								<input type="text" th:field="*{deskripsi}" required /><br />
+
+								<label>Jumlah:</label>
+								<input type="number" th:field="*{jumlah}" required /><br />
+
+								<label>Bank Tujuan:</label>
+								<select th:field="*{tujuanBank}" required>
+									<option value="bca">BCA</option>
+									<option value="bni">BNI</option>
+									<option value="bri">BRI</option>
+									<option value="mandiri">Mandiri</option>
+								</select><br />
+
+								<label>Nomor Rekening:</label>
+								<input type="text" th:field="*{nomorRekening}" required /><br />
+
+								<label>Nama Penerima:</label>
+								<input type="text" th:field="*{namaPenerima}" required /><br />
+
+								<button type="submit">Kirim</button>
+							</form>
+						</div>
+						<!-- /.card-body -->
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+</body>
+</html>

@@ -12898,10 +12898,17 @@ textarea.form-control-lg {
   --lte-sidebar-menu-active-color: #000;
   --lte-sidebar-submenu-bg: transparent;
   --lte-sidebar-submenu-color: #777;
+<<<<<<< HEAD
   --lte-sidebar-submenu-hover-color: #000;
   --lte-sidebar-submenu-hover-bg: rgba(0, 0, 0, 0.1);
   --lte-sidebar-submenu-active-color: #212529;
   --lte-sidebar-submenu-active-bg: rgba(0, 0, 0, 0.1);
+=======
+  --lte-sidebar-submenu-hover-color: #212529;
+  --lte-sidebar-submenu-hover-bg: rgba(96, 96, 96, 0.5);
+  --lte-sidebar-submenu-active-color: #212529;
+  --lte-sidebar-submenu-active-bg: rgba(96, 96, 96, 0.5);
+>>>>>>> master
   --lte-sidebar-header-color: rgb(49.4, 55.1, 60.8);
   z-index: 1038;
   grid-area: lte-app-sidebar;
