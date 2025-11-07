@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+</head>
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+	<div class="app-wrapper">
+		<!-- ==================== HEADER ==================== -->
+		<div th:replace="fragments/header :: header"></div>
+
+		<!-- ==================== SIDEBAR ==================== -->
+		<div th:replace="fragments/sidebar  :: sidebar"></div>
+
+		<!-- ==================== CONTENT ==================== -->
+		<main class="app-main">
+			<div class="app-content p-3 p-md-5">
+				<div class="container-fluid">
+					<div class="d-flex align-items-center mb-4">
+						<a href="/warga" class="text-success me-3">
+							<i class="bi bi-arrow-left-circle fs-3"></i>
+						</a>
+						<div>
+							<h2 class="mb-0 text-success">Edit Data Warga</h2>
+							<p class="text-muted mb-0">Lengkapi formulir di bawah untuk mengedit data Warga.</p>
+						</div>
+					</div>
+
+					<form id="userForm" th:action="@{/warga/update/{id}(id=${warga.id})}" th:object="${warga}" method="post" enctype="multipart/form-data">
+						<div class="row g-4">
+
+							<div class="col-md-4">
+								<div class="card shadow-sm border-0 h-100">
+									<div class="card-header border-bottom bg-success text-white">
+										<h5 class="card-title mb-0">
+											<i class="bi bi-camera me-2"></i>
+											File Pendukung
+										</h5>
+									</div>
+									<div class="card-body d-flex flex-column">
+
+										<div class="text-center mb-4">
+											<img th:src="${warga.avatarPath != null} ? @{'/uploads/avatars/' + ${warga.avatarPath}} : @{/img/defaultPP.jpg}" id="avatarPreview" class="rounded-circle img-thumbnail border border-2 p-1" style="width: 150px; height: 150px; object-fit: cover;" alt="Avatar" />
+										</div>
+
+										<div class="mb-3">
+											<label for="avatarInput" class="form-label">Upload Foto (Max 1MB, JPG/PNG):</label>
+											<input type="file" id="avatarInput" name="avatar" class="form-control" accept="image/jpeg,image/png,image/jpg" />
+											<div class="invalid-feedback" id="avatarUpload-error"></div>
+										</div>
+
+										<div class="mb-3">
+											<label for="uploadKK" class="form-label">Upload PDF KK (Max 2MB):</label>
+											<input type="file" id="uploadKK" name="uploadKK" class="form-control" accept="application/pdf" />
+											<div class="invalid-feedback" id="uploadKK-error"></div>
+										</div>
+
+										<button th:if="${warga.kkPath != null}" type="button" class="btn btn-sm btn-secondary mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											Lihat KK
+											<i class="bi bi-filetype-pdf ms-2"></i>
+										</button>
+										<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog modal-lg">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">Kartu Keluarga</h5>
+														<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+													</div>
+													<div class="modal-body">
+														<iframe th:src="@{'/view/pdf/kk/' + ${warga.kkPath}}" width="100%" height="500px" style="border: 1px solid #ccc;" type="application/pdf"></iframe>
+													</div>
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-8">
+								<div class="card shadow-sm border-0 h-100">
+									<div class="card-header bg-success text-white">
+										<h5 class="card-title mb-0">
+											<i class="bi bi-person-fill me-2"></i>
+											Data Warga
+										</h5>
+									</div>
+									<div class="card-body">
+
+										<h6 class="text-success border-bottom border-2 pb-1 mb-3 fw-bold">Informasi Utama</h6>
+										<div class="row">
+											<div class="col-md-6 mb-3">
+												<label for="namaWarga" class="form-label">
+													Nama Warga/Kepala Keluarga
+													<span class="text-danger">*</span>
+												</label>
+												<input type="text" id="namaWarga" th:field="${warga.namaWarga}" placeholder="Nama Lengkap..." class="form-control border border-secondary" size="50" required>
+												<div class="invalid-feedback"></div>
+											</div>
+											<div class="col-md-6 mb-3">
+												<label for="nomerHp" class="form-label">
+													Nomor HP
+													<span class="text-danger">*</span>
+												</label>
+												<input type="text" id="nomerHp" th:field="${warga.nomerHp}" placeholder="08..." class="form-control border border-secondary" size="50" required>
+												<div class="invalid-feedback"></div>
+											</div>
+										</div>
+
+										<h6 class="text-success border-bottom border-2 pb-1 mb-3 mt-3 fw-bold">Alamat Rumah</h6>
+										<div class="row">
+											<div class="col-md-6 mb-3">
+												<label for="blok" class="form-label ">
+													Blok
+													<span class="text-danger">*</span>
+												</label>
+												<select id="blok" name="blok" th:field="*{blok}" class="form-select border border-secondary" required>
+													<option value="">-- Pilih Blok --</option>
+													<option value="K">Blok K</option>
+													<option value="L">Blok L</option>
+													<option value="M">Blok M</option>
+													<option value="N">Blok N</option>
+													<option value="O">Blok O</option>
+												</select>
+												<div class="invalid-feedback"></div>
+											</div>
+											<div class="col-md-6 mb-3">
+												<label for="nomerRumah" class="form-label">
+													Nomor Rumah
+													<span class="text-danger">*</span>
+												</label>
+												<select th:field="*{nomerRumah}" class="form-select border border-secondary">
+													<option value="">-- Pilih Nomor Rumah --</option>
+													<option th:each="i : ${#numbers.sequence(1,50)}" th:value="${i < 10 ? '0' + i : i}" th:text="${i < 10 ? '0' + i : i}"></option>
+												</select>
+												<div class="invalid-feedback"></div>
+											</div>
+										</div>
+
+										<h6 class="text-success border-bottom border-2 pb-1 mb-3 mt-3 fw-bold">Akses & Jabatan</h6>
+										<div class="row">
+											<div class="col-md-6 mb-3">
+												<label for="passwordWarga" class="form-label">
+													Password
+													<span class="text-danger">*</span>
+												</label>
+												<input type="password" id="passwordWarga" name="passwordWarga" placeholder="Minimal 6 Karakter..." class="form-control border border-secondary" size="50">
+												<div class="invalid-feedback"></div>
+											</div>
+											<div class="col-md-6 mb-3">
+												<label for="roleWarga" class="form-label">
+													Hak Akses (Role)
+													<span class="text-danger">*</span>
+												</label>
+												<select id="roleWarga" name="roleWarga" th:field="*{roleWarga}" class="form-select border border-secondary" required>
+													<option value="">-- Pilih Hak Akses --</option>
+													<option value="ADMIN">Admin</option>
+													<option value="USER">User (Warga Biasa)</option>
+												</select>
+												<div class="invalid-feedback"></div>
+											</div>
+											<div class="col-md-6 mb-3">
+												<label for="jabatan" class="form-label">
+													Jabatan di Komplek
+													<span class="text-danger">*</span>
+												</label>
+												<select id="jabatan" name="jabatan" th:field="*{jabatan}" class="form-select border border-secondary" required>
+													<option value="">-- Pilih Jabatan --</option>
+													<option value="rt">Ketua RT</option>
+													<option value="sekertaris">Sekretaris</option>
+													<option value="bendahara">Bendahara</option>
+													<option value="warga">Warga Biasa</option>
+												</select>
+												<div class="invalid-feedback"></div>
+											</div>
+										</div>
+
+									</div>
+									<div class="card-footer bg-light border-top text-center p-3 d-flex flex-wrap justify-content-center gap-3">
+										<button class="btn btn-success btn-lg shadow" id="submitBtn" type="submit">
+											<i class="bi bi-save me-2"></i>
+											Perbarui Data Warga
+										</button>
+										<button class="btn btn-outline-secondary btn-lg" type="reset">
+											<i class="bi bi-x-circle me-2"></i>
+											Reset Form
+										</button>
+									</div>
+
+								</div>
+							</div>
+
+						</div>
+					</form>
+				</div>
+			</div>
+		</main>
+	</div>
+
+	<script th:inline="none">
+    //ALERT BEFORE SUBMIT
+    document
+        .addEventListener(
+            "DOMContentLoaded",
+            function() {
+              const form = document.getElementById("userForm");
+              
+              form
+                  .addEventListener(
+                      "submit",
+                      function(e) {
+                        e.preventDefault(); // Tahan submit terlebih dahulu
+                        
+                        iziToast
+                            .question({
+                              timeout : false,
+                              close : false,
+                              overlay : true,
+                              displayMode : 'once',
+                              id : 'question',
+                              zindex : 999,
+                              title : 'Konfirmasi',
+                              message : '<span class="text-black">Apakah Anda yakin ingin <b class="text-black">Update</b> data ini?</span>',
+                              position : 'center',
+                              buttons : [
+                                  [ '<button><b>YA</b></button>',
+                                      function(instance, toast) {
+                                        instance.hide({
+                                          transitionOut : 'fadeOut'
+                                        }, toast, 'button');
+                                        form.submit();
+                                      }, true ],
+                                  [ '<button>TIDAK</button>',
+                                      function(instance, toast) {
+                                        instance.hide({
+                                          transitionOut : 'fadeOut'
+                                        }, toast, 'button');
+                                      } ] ]
+                            });
+                      });
+            });
+  </script>
+</body>
+</html>
