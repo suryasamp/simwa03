@@ -2,21 +2,23 @@
 
 [![Java](https://img.shields.io/badge/Java-17-blue.svg)](https://www.java.com/)
 [![Spring MVC](https://img.shields.io/badge/Spring-MVC-brightgreen.svg)](https://spring.io/)
-[![Midtrans](https://img.shields.io/badge/Payment-Midtrans-orange.svg)](https://midtrans.com/)
 [![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-336791.svg)](https://www.postgresql.org/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**SIMWA** adalah aplikasi berbasis **Spring MVC + jQuery** yang dirancang untuk membantu pengelolaan data warga dan pembayaran iuran secara **efisien, transparan, dan mudah digunakan**. Aplikasi ini terintegrasi dengan **Midtrans Payment Gateway** untuk mendukung pembayaran online yang aman dan praktis.
+**SIMWA** adalah aplikasi berbasis **Spring MVC ** yang dirancang untuk membantu pengelolaan data warga dan pembayaran iuran secara **efisien, transparan, dan mudah digunakan**.  
+Pembayaran iuran dapat dilakukan **secara manual**, baik melalui **transfer bank, tunai, maupun QRIS**, tanpa integrasi gateway eksternal.
 
 ---
 
 ## 🚀 Fitur Utama
 
 - 👥 **Manajemen Data Warga (CRUD)**
-- 💰 **Pembayaran Iuran Online** via Midtrans Snap API
-- 🔑 **Validasi Signature Key** untuk keamanan transaksi
-- 📊 **Dashboard Admin** untuk memantau status pembayaran
+- 💰 **Pencatatan Pembayaran Iuran Manual**
+- 🧾 **Riwayat Iuran dan Status Pembayaran**
+- 📊 **Dashboard Admin** untuk memantau total iuran & saldo kas
 - ⚙️ **AJAX & jQuery** untuk tampilan interaktif dan dinamis
-- 🧾 **Integrasi Database PostgreSQL**
+- 🧩 **Upload Bukti Pembayaran (opsional)**
+- 🗃️ **Integrasi Database PostgreSQL**
 
 ---
 
@@ -24,10 +26,9 @@
 
 | Kategori | Teknologi |
 |-----------|------------|
-| **Backend** | Java, Spring MVC, Spring Boot (opsional) |
+| **Backend** | Java, Spring MVC, Spring Boot |
 | **Frontend** | HTML, CSS, Bootstrap, jQuery, AJAX |
 | **Database** | PostgreSQL |
-| **Payment** | Midtrans Payment Gateway |
 | **Version Control** | Git & GitHub |
 
 ---
@@ -38,37 +39,42 @@
    ```bash
    git clone https://github.com/suryasamp/simwa.git
    cd simwa
-   
-2. **Konfigurasi application.properties**<br>
-   Tambahkan di application.properties:
    ```
-   #Configurasi Database
+
+2. **Konfigurasi `application.properties`**
+   ```properties
+   # Konfigurasi Database
    spring.datasource.url=jdbc:postgresql://localhost:5432/simwa_db
    spring.datasource.username=postgres
    spring.datasource.password=your_password
-
-   #Configurasi Midtrans
-   midtrans.server.key=YOUR_SERVER_KEY
-   midtrans.client.key=YOUR_CLIENT_KEY
-   midtrans.is_production=false
 
    # Optional JPA settings
    spring.jpa.hibernate.ddl-auto=update
    spring.jpa.show-sql=true
    spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 
-   # Path folder upload, bisa diubah sesuai server
+   # Path folder upload (bisa diubah sesuai server)
    file.upload-dir=C:/simwa3/uploads
 
    # Multipart file size limit
    spring.servlet.multipart.max-file-size=10MB
    spring.servlet.multipart.max-request-size=20MB
+   ```
 
 3. **Jalankan aplikasi**
    ```bash
    mvn spring-boot:run
    ```
    Lalu buka di browser: [http://localhost:8080](http://localhost:8080)
+
+---
+
+## 💳 Alur Pembayaran Manual
+
+1. Warga melakukan pembayaran iuran **tunai**, **transfer**, atau **QRIS** ke kas RT.  
+2. Admin atau bendahara dapat mencatat transaksi tersebut di menu **Manajemen Iuran**.  
+3. Bukti pembayaran (jika ada) dapat diunggah untuk transparansi.  
+4. Sistem akan otomatis menghitung total kas dan status iuran warga.
 
 ---
 
@@ -81,12 +87,10 @@
 
 ---
 
-
 ## 🌟 Dukungan
 
-Jika **SIMWA** membantu kamu memahami integrasi **Midtrans** atau membangun sistem warga,  
-beri ⭐ di repo ini — itu sangat membantu pengembang terus memperbarui proyek ini 🙌
-
+Jika **SIMWA** membantu kamu membangun sistem pengelolaan kas warga atau administrasi RT/RW,  
+beri ⭐ di repo ini — dukungan kecilmu membantu pengembangan berkelanjutan 🙌
 
 ---
 
@@ -95,6 +99,3 @@ beri ⭐ di repo ini — itu sangat membantu pengembang terus memperbarui proyek
 📍 Developer: [Surya Adimulya Pratama](https://github.com/suryasamp)
 
 ---
-
-   
- 
