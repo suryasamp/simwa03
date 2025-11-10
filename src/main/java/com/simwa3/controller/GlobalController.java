@@ -52,8 +52,8 @@ public class GlobalController {
     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     	if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
     		WargaModel wargaLogin = wargaRepository.findByCodeWarga(authentication.getName());
-    		String jabatan = wargaLogin.getJabatan();
-    		String penerima = jabatan;
+    		String codeWarga = wargaLogin.getCodeWarga();
+    		String penerima = codeWarga;
     		Long jumlahNotifBaru = notifikasiRepo.countByPenerimaAndDibacaFalse(penerima);
     		List<NotifikasiModel> listNotifBaru = notifikasiRepo.findByPenerimaOrderByCreatedAtDesc(penerima).stream().limit(5).toList();
     		

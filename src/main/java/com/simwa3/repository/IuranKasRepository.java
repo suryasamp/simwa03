@@ -13,6 +13,8 @@ public interface IuranKasRepository extends JpaRepository<IuranKasModel, Long> {
 	//get list data bedasarkan Code Warga
 	List<IuranKasModel> findByCodeWargaOrderByUpdatedAtDesc(String name);
 	
+	IuranKasModel findByOrderId(String name);
+	
 }
 
 

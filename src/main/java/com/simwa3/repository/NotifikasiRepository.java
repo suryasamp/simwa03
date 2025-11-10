@@ -11,6 +11,9 @@ import com.simwa3.model.NotifikasiModel;
 public interface NotifikasiRepository extends JpaRepository<NotifikasiModel, Long> {
     
 	List<NotifikasiModel> findByPenerimaOrderByCreatedAtDesc(String penerima);
-    Long countByPenerimaAndDibacaFalse(String penerima);
+   
+	Long countByPenerimaAndDibacaFalse(String penerima);
+	
+	NotifikasiModel findByOrderId(String name);
     
 }

@@ -89,4 +89,25 @@ public class IuranKasController {
 		// Delete logic here
 		return "redirect:/management_iuran/iuran_kas";
 	}
+	
+	@GetMapping("/detail/{orderId}")
+	public String showIuranDetail(@PathVariable String orderId, Model model) {
+		// 1. Ambil Data Detail
+        // Panggil service untuk mencari data iuran lengkap berdasarkan orderId
+         IuranKasModel iuranDetail = iuranKasRepo.findByOrderId(orderId);
+        
+        // 2. Tambahkan Data ke Model
+        // Contoh: Jika data tidak ditemukan
+         if (iuranDetail == null) {
+        	 return "redirect:/management_iuran/iuran_kas"; // Ganti dengan halaman error Anda
+         }
+
+        // Untuk contoh ini, kita asumsikan data berhasil diambil dan ditambahkan ke model
+        model.addAttribute("iuran", iuranDetail); 
+        model.addAttribute("testOrderId", orderId); // Hanya untuk pengujian
+        
+        // 3. Kembalikan Nama View
+        // Controller akan mencari template Thymeleaf di /resources/templates/iuran/detail.html
+        return "/management_iuran/iuran_kas/detail";
+	}
 }

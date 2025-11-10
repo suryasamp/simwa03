@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+</head>
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+	<div class="app-wrapper">
+		<!-- ==================== HEADER ==================== -->
+		<div th:replace="fragments/header :: header"></div>
+
+		<!-- ==================== SIDEBAR ==================== -->
+		<div th:replace="fragments/sidebar  :: sidebar"></div>
+
+		<input type="hidden" id="message" name="message" th:value="${message}">
+
+		<!-- ==================== CONTENT ==================== -->
+		<main class="app-main">
+			<div class="app-content p-3 p-md-5">
+				<div class="container-fluid">
+					<div class="d-flex justify-content-between align-items-center mb-3 pt-2">
+						<div class="d-flex align-items-center mb-4">
+							<a href="javascript:history.back()" class="text-success me-3">
+								<i class="bi bi-arrow-left-circle fs-3"></i>
+							</a>
+							<div>
+								<h2 class="mb-0 text-success">Halaman Konfirmasi Pembayaran</h2>
+								<p class="text-muted mb-0">Kinfirmasi Pembayaran.</p>
+							</div>
+						</div>
+					</div>
+					<div class="card card-outline card-success">
+						<div class="card-header bg-white border-bottom">
+							<h4 class="card-title mb-0 text-success fw-bold">
+								<i class="bi bi-list-check me-2"></i>
+								Data Pembayaran
+							</h4>
+							<div class="card-tools">
+								<button type="button" class="btn btn-tool text-muted" data-lte-toggle="card-collapse">
+									<i data-lte-icon="expand" class="bi bi-plus-lg"></i>
+									<i data-lte-icon="collapse" class="bi bi-dash-lg"></i>
+								</button>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="mb-5">
+								<div class="mb-4 pb-0 border-bottom border-3">
+									<h6 class="mb-3 text-success">Data Warga</h6>
+									<div class="row mb-3">
+										<div class="col-sm-4">
+											<label class="col-form-label">Nama Warga :</label>
+										</div>
+										<div class="col-sm-8">
+											<span th:text="${iuran.namaWarga}" class="fw-bold"></span>
+										</div>
+										<div class="col-sm-4">
+											<label class="col-form-label">Alamat :</label>
+										</div>
+										<div class="col-sm-8">
+											<span th:text="${iuran.codeWarga}" class="fw-bold"></span>
+										</div>
+									</div>
+								</div>
+								<div class="mb-4 pb-0 border-bottom border-3">
+									<h6 class="mb-3 text-success">Detail Pembayaran</h6>
+									<div class="row mb-3">
+										<div class="col-sm-4">
+											<label class="col-form-label">Order Id :</label>
+										</div>
+										<div class="col-sm-8">
+											<span th:text="${iuran.orderId}" class="fw-bold"> </span>
+										</div>
+										<div class="col-sm-4">
+											<label class="col-form-label">Bulan :</label>
+										</div>
+										<div class="col-sm-8">
+											<span th:each="bulan : ${#strings.arraySplit(iuran.bulan, ',')}" th:text="${bulan}" class="badge text-bg-secondary border me-1 mb-1"> </span>
+										</div>
+										<div class="col-sm-4">
+											<label class="col-form-label">Tahun :</label>
+										</div>
+										<div class="col-sm-8">
+											<span th:text="${iuran.Tahun}" class="fw-bold"></span>
+										</div>
+										<div class="col-sm-4">
+											<label class="col-form-label">Total :</label>
+										</div>
+										<div class="col-sm-8">
+											<span th:text="${'Rp	' +#numbers.formatDecimal(iuran.total, 0, 'POINT', 0, 'NONE')}" class="fw-bold"></span>
+										</div>
+										<div class="col-sm-4">
+											<label class="col-form-label">Tanggal Pembayaran :</label>
+										</div>
+										<div class="col-sm-8">
+											<span th:text="${#temporals.format(iuran.createdAt, 'dd MMM yyyy HH:mm')}" class="fw-bold"></span>
+										</div>
+										<div class="col-sm-4">
+											<label class="col-form-label">Status :</label>
+										</div>
+										<div class="col-sm-8">
+											<span th:text="${iuran.status}" th:classappend="${iuran.status == 'pending'} ? 'badge bg-warning text-black' : 'badge bg-success'"></span>
+										</div>
+									</div>
+								</div>
+								<div th:if="${iuran.status} == 'pending'">
+									<form th:action="@{'/notifikasi/settlement/' + ${iuran.orderId}}" method="post">
+										<button type="submit" class="btn btn-success mt-3">Setujui Pembayaran</button>
+									</form>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+</body>
+</html>

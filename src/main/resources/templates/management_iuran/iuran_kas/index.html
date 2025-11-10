@@ -9,7 +9,7 @@
 
 		<!-- ==================== SIDEBAR ==================== -->
 		<div th:replace="fragments/sidebar  :: sidebar"></div>
-		
+
 		<input type="hidden" id="message" name="message" th:value="${message}">
 
 		<!-- ==================== CONTENT ==================== -->
@@ -18,7 +18,10 @@
 				<div class="container-fluid">
 					<div class="d-flex justify-content-between align-items-center mb-4 pt-2">
 						<div>
-							<h2 class="mb-0 text-success">Halaman Riwayat Iuran <span th:text="${wargaLogin.namaWarga}"></span></h2>
+							<h2 class="mb-0 text-success">
+								Halaman Riwayat Iuran
+								<span th:text="${wargaLogin.namaWarga}"></span>
+							</h2>
 							<p class="text-muted mb-0">Riwayat lengkap seluruh iuran.</p>
 						</div>
 						<div>
@@ -43,46 +46,46 @@
 						</div>
 						<div class="card-body">
 							<div class="table-responsive" style="overflow-x: scroll;">
-								<div  class="mb-5">
+								<div class="mb-5">
 									<table id="userTable" class="table table-bordered display table-hover">
 										<thead>
 											<tr>
 												<th>No.</th>
-												<th class="min-width-120">Order Id</th>
-												<th class="min-width-150">Tanggal</th>
+												<th class="">Order Id</th>
+												<th class="">Tanggal</th>
 												<th class="min-width-200">Nama Warga</th>
 												<th>Blok</th>
-												<th class="min-width-200">Bulan</th>
+												<th class="">Bulan</th>
 												<th>Tahun</th>
 												<th>Status</th>
-<!-- 												<th class="min-width-150">Metode</th> -->
+												<!-- 												<th class="min-width-150">Metode</th> -->
 												<th class="min-width-150">Total</th>
 											</tr>
 										</thead>
 										<tbody>
-																					<tr th:each="iuran, iterStat : ${listIuran}">
+											<tr th:each="iuran, iterStat : ${listIuran}">
 												<td th:text="${iterStat.index + 1}"></td>
 												<td th:text="${iuran.orderId}"></td>
-												<td th:text="${#temporals.format(iuran.updatedAt, 'dd-MM-yyyy HH:mm')}"></td>
+												<td th:text="${#temporals.format(iuran.updatedAt, 'dd-MM-yyyy')}"></td>
 												<td th:text="${iuran.namaWarga}"></td>
 												<td th:text="${iuran.codeWarga}"></td>
 												<td>
-													<span th:each="bulan : ${#strings.arraySplit(iuran.bulan, ',')}" 
-														th:text="${bulan}" 
-														class="badge text-bg-light border me-1 mb-1">
-													</span>
+													<th:block th:with="bulanArray=${#strings.arraySplit(iuran.bulan, ',')}, bulanCount=${bulanArray.length}">
+														<span th:if="${bulanCount > 1}" th:text="${bulanArray[0] + ' - ' + bulanArray[__${bulanCount - 1}__]}" class="badge text-bg-secondary"> </span>
+														<span th:if="${bulanCount == 1}" th:text="${bulanArray[0]}" class="badge text-bg-secondary"> </span>
+													</th:block>
 												</td>
 
 												<td th:text="${iuran.tahun}"></td>
 												<td>
-												  <span th:switch="${iuran.status}" class="badge">
-												    <span th:case="'settlement'" class="badge text-bg-success">SETTLEMENT</span>
-												    <span th:case="'pending'" class="badge text-bg-warning text-dark" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Proses pengecekan oleh Bendahara">PENDING</span>
-												    <span th:case="'expire'" class="badge text-bg-danger">EXPIRE</span>
-												    <span th:case="*" class="badge text-bg-secondary">UNKNOWN</span>
-												  </span>
+													<span th:switch="${iuran.status}" class="badge">
+														<span th:case="'settlement'" class="badge text-bg-success">SETTLEMENT</span>
+														<span th:case="'pending'" class="badge text-bg-warning text-dark" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Proses pengecekan oleh Bendahara">PENDING</span>
+														<span th:case="'expire'" class="badge text-bg-danger">EXPIRE</span>
+														<span th:case="*" class="badge text-bg-secondary">UNKNOWN</span>
+													</span>
 												</td>
-<!-- 												<td th:text="${#strings.capitalize(#strings.replace(iuran.paymentType, '_', ' '))}"></td> -->
+												<!-- 												<td th:text="${#strings.capitalize(#strings.replace(iuran.paymentType, '_', ' '))}"></td> -->
 												<td th:text="${'Rp	' +#numbers.formatDecimal(iuran.total, 0, 'POINT', 0, 'NONE')}"></td>
 											</tr>
 										</tbody>
@@ -125,10 +128,18 @@
         }
       });
       
-      //DATA TABLE
-      $("#userTable").DataTable({
+      let table = $("#userTable").DataTable({
         autoWidth : false,
         ordering : false,
+      });
+       
+      $('#userTable tbody').on('click', 'tr', function() {
+        let rowData = table.row(this).data();
+        if (rowData) {
+          var order_id =  rowData[1];
+          console.log('clicked Order Id: ' + order_id);
+          window.location.href = 'iuran_kas/detail/'+order_id;
+        }
       });
       
     });

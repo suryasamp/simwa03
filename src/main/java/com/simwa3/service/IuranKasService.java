@@ -8,14 +8,19 @@ import org.springframework.stereotype.Service;
 import com.simwa3.controller.IuranKasController;
 import com.simwa3.model.IuranKasModel;
 import com.simwa3.model.NotifikasiModel;
+import com.simwa3.model.WargaModel;
 import com.simwa3.repository.IuranKasRepository;
 import com.simwa3.repository.NotifikasiRepository;
+import com.simwa3.repository.WargaRepository;
 
 @Service
 public class IuranKasService {
 
 	@Autowired
 	private IuranKasRepository iuranKasRepo;
+	
+	@Autowired
+	private WargaRepository WargaRepo;
 	
 	@Autowired
 	private NotifikasiRepository notifRepo;
@@ -29,7 +34,7 @@ public class IuranKasService {
 		IuranKasModel entity = new IuranKasModel();
 		String randomChar = UUID.randomUUID().toString().substring(0, 8);
 		String blok = iuranKas.getCodeWarga();
-		String orderId = blok + "-" + randomChar;
+		String orderId = "KAS-" + blok + "-" + randomChar;
 		entity.setOrderId(orderId);
 		entity.setNamaWarga(iuranKas.getNamaWarga());
 		entity.setCodeWarga(iuranKas.getCodeWarga());
@@ -41,6 +46,7 @@ public class IuranKasService {
 		
 		/*===== Send Notif ke WA Bendahara =====*/
 		String pesan = "🔔 *Notifikasi Pembayaran Iuran Kas Baru*\n\n" 
+				+ "Dari: *" + orderId + "*\n"
 				+ "Dari: *" + iuranKas.getNamaWarga() + "*\n"
 				+ "Blok: *" + iuranKas.getCodeWarga() + "*\n"
 				+ "Periode: *" + iuranKas.getBulan() + "*\n"
@@ -53,8 +59,12 @@ public class IuranKasService {
 		
 		/*===== Send Notif ke Bendahara =====*/
 	    NotifikasiModel notif = new NotifikasiModel();
-	    notif.setTipe("pembayaran_iuran");
-	    notif.setPenerima("bendahara");
+	    WargaModel jabatan = WargaRepo.findByJabatan("bendahara");
+	    String penerima = jabatan.getCodeWarga();
+	    notif.setOrderId(orderId);
+	    notif.setTipe("Iuran Kas");
+	    notif.setPengirim(blok);
+	    notif.setPenerima(penerima);
 	    notif.setPesan("Warga " + iuranKas.getNamaWarga() +
 	        " melakukan pembayaran iuran kas periode " + iuranKas.getBulan() +
 	        " " + iuranKas.getTahun() + " sebesar Rp " + iuranKas.getTotal());

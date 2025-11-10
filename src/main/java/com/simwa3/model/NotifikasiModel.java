@@ -2,6 +2,7 @@ package com.simwa3.model;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,10 +16,12 @@ public class NotifikasiModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String tipe; // contoh: "pembayaran_iuran"
+    @Column(name = "order_id")
+    private String orderId;
+    private String tipe;
     private String pesan;
-    private String penerima; // "bendahara", atau code user jika multi-user
+    private String pengirim;
+    private String penerima;
     private Boolean dibaca = false;
 
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -29,6 +32,14 @@ public class NotifikasiModel {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
 	}
 
 	public String getTipe() {
@@ -45,6 +56,14 @@ public class NotifikasiModel {
 
 	public void setPesan(String pesan) {
 		this.pesan = pesan;
+	}
+
+	public String getPengirim() {
+		return pengirim;
+	}
+
+	public void setPengirim(String pengirim) {
+		this.pengirim = pengirim;
 	}
 
 	public String getPenerima() {
@@ -70,5 +89,6 @@ public class NotifikasiModel {
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
+
     
 }

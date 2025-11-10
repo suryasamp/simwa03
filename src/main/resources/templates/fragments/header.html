@@ -28,6 +28,7 @@
 						<li th:each="notif : ${listNotifBaru}">
 							<a th:href="@{'/notifikasi/baca/' + ${notif.id}}" class="dropdown-item small">
 								<div class="d-flex flex-column">
+									<span style="white-space: normal; word-wrap: break-word;font-weight:bold;" th:text="|Order ID: ${notif.orderId}|"></span>
 									<span style="white-space: normal; word-wrap: break-word;" th:text="${notif.pesan}"></span>
 									<small class="text-muted" th:text="${#temporals.format(notif.createdAt, 'dd MMM yyyy HH:mm')}"></small>
 								</div>

@@ -45,9 +45,13 @@ public class IuranKasModel {
 	@Column(name="total")
 	private BigDecimal total;
 	
+	
+	
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime updatedAt;
+    
+    private LocalDateTime createdAt = LocalDateTime.now();
 
 	//GET SET
 	
@@ -131,6 +135,14 @@ public class IuranKasModel {
 
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
 	}
 	
 	
